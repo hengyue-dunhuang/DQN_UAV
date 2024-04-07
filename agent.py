@@ -70,7 +70,8 @@ class DQN:
         self.q_net = Net(self.n_states, self.n_hidden, self.n_actions)
         # 实例化目标网络
         self.target_q_net = Net(self.n_states, self.n_hidden, self.n_actions)
-
+        # 初始化使得q网络与target网络相同
+        self.target_q_net.load_state_dict(self.q_net.state_dict())
         # 优化器，更新训练网络的参数
         self.optimizer = torch.optim.Adam(self.q_net.parameters(), lr=self.learning_rate)
 
